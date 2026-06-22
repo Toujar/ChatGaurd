@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 13%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 13%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 222 47% 11%;
+    --info: 199 89% 48%;
+    --info-foreground: 210 40% 98%;
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 217 91% 60%;
+    --radius: 0.75rem;
+
+    --risk-low: 142 76% 50%;
+    --risk-medium: 38 92% 50%;
+    --risk-high: 25 95% 53%;
+    --risk-critical: 0 84% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+    transition: background 0.2s;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/40;
+  }
+
+  ::selection {
+    @apply bg-primary/30 text-foreground;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-lg;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent;
+  }
+
+  .status-online {
+    @apply bg-success;
+  }
+
+  .status-away {
+    @apply bg-warning;
+  }
+
+  .status-busy {
+    @apply bg-destructive;
+  }
+
+  .status-offline {
+    @apply bg-muted-foreground;
+  }
+
+  .risk-badge-low {
+    @apply bg-risk-low/20 text-risk-low border-risk-low/30;
+  }
+
+  .risk-badge-medium {
+    @apply bg-risk-medium/20 text-risk-medium border-risk-medium/30;
+  }
+
+  .risk-badge-high {
+    @apply bg-risk-high/20 text-risk-high border-risk-high/30;
+  }
+
+  .risk-badge-critical {
+    @apply bg-risk-critical/20 text-risk-critical border-risk-critical/30;
+  }
+
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(var(--background), var(--background)) padding-box,
+                linear-gradient(135deg, hsl(var(--primary)), hsl(var(--info)), hsl(var(--success))) border-box;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+  }
+
+  .skeleton {
+    @apply bg-muted animate-pulse rounded;
+  }
+
+  .interactive {
+    @apply transition-all duration-200 hover:bg-white/5 active:scale-[0.98];
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-muted-foreground
+           transition-all duration-200 hover:text-foreground hover:bg-white/5;
+  }
+
+  .sidebar-item.active {
+    @apply text-primary bg-primary/10;
+  }
+
+  .message-bubble {
+    @apply relative px-4 py-3 rounded-2xl max-w-[70%];
+  }
+
+  .message-bubble.sent {
+    @apply bg-primary text-primary-foreground rounded-br-md ml-auto;
+  }
+
+  .message-bubble.received {
+    @apply bg-muted text-foreground rounded-bl-md;
+  }
+
+  .protection-overlay {
+    @apply absolute inset-0 bg-background/90 backdrop-blur-sm z-50
+           flex items-center justify-center opacity-0 pointer-events-none
+           transition-opacity duration-300;
+  }
+
+  .protection-overlay.active {
+    @apply opacity-100 pointer-events-auto;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+}
